@@ -102,7 +102,7 @@ done
   * Annotated models in .mat format (one per organism, in 'FBA/Models/Final/')
   * Annotated models in SBML format (one per organism, in 'FBA/Models/Final/sbml')
 
-# Verify models using MEMOTE:
+## Verify models using MEMOTE:
 
 **Key inputs:**
   * Annotated models in SBML format (in 'FBA/Models/Final/sbml')
