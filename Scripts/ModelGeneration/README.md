@@ -64,6 +64,8 @@ done
   * Draft models (in 'FBA/Models/CarveMe/sbml_noGF/')
   * Carbon source screen data ('Medium/CSourceScreen_Jul2022.xlsx')
 
+0. Unpack the matTFA toolbox located in NICEgame/matTFA-master/matTFA.zip
+
 1. Open MATLAB and the 'gapFillModelTFA.m' script. This script generates genome-scale metabolic models from previously-generated CarveMe reconstructions and experimental data using the matTFA (Thermodynamic Flux Analysis, Salvy *et al.*, 2019) and NICEgame (Vayena *et al.*, 2022) pipelines.
 
  This script takes a CarveMe reconstruction of an organism and its corresponding experimental data (in .xlsx format representing growth/no growth on carbon sources) as its main inputs. It performs gapfilling using NICEgame and matTFA, which merge the corresponding draft model with a universal metabolite/reaction database and constrains reactions using thermodynamic information. NICEgame then finds candidate reactions that need to be added to the reconstructions to enable growth on each carbon source.
