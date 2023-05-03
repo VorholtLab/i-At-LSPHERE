@@ -1,4 +1,4 @@
-*i-At*-LSPHERE collection of genome-scale metabolic models
+*i-At*-LSPHERE genome-scale metabolic models
 ========================
 
 This repository contains the collection of genome-scale metabolic models reported in Schäfer, Pacheco, *et al.*, as well as the scripts required to generate the models and simulate community outcomes.
