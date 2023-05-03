@@ -69,9 +69,9 @@ done
 
 2. Open MATLAB and the 'gapFillModelTFA.m' script. This script generates genome-scale metabolic models from previously-generated CarveMe reconstructions and experimental data using the matTFA (Thermodynamic Flux Analysis, Salvy *et al.*, 2019) and NICEgame (Vayena *et al.*, 2022) pipelines.
 
- This script takes a CarveMe reconstruction of an organism and its corresponding experimental data (in .xlsx format representing growth/no growth on carbon sources) as its main inputs. It performs gapfilling using NICEgame and matTFA, which merge the corresponding draft model with a universal metabolite/reaction database and constrains reactions using thermodynamic information. NICEgame then finds candidate reactions that need to be added to the reconstructions to enable growth on each carbon source.
+     This script takes a CarveMe reconstruction of an organism and its corresponding experimental data (in .xlsx format representing growth/no growth on carbon sources) as its main inputs. It performs gapfilling using NICEgame and matTFA, which merge the corresponding draft model with a universal metabolite/reaction database and constrains reactions using thermodynamic information. NICEgame then finds candidate reactions that need to be added to the reconstructions to enable growth on each carbon source.
 
- The script then selects the best combination of gapfilled reactions to use by predicting the growth/no growth phenotype of each model on combinations of solutions. It then saves COBRA model files for downstream curation.
+     The script then selects the best combination of gapfilled reactions to use by predicting the growth/no growth phenotype of each model on combinations of solutions. It then saves COBRA model files for downstream curation.
 
 **Key outputs:**
   * List of candidate reactions for gapfilling (in 'FBA/Models/NICEgame/GapfillingResults/')
