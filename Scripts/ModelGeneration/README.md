@@ -15,6 +15,8 @@ Software requirements:
   * [MEMOTE](https://memote.readthedocs.io/en/latest/)
 
 ## Generate draft metabolic reconstructions using CarveMe:
+
+**Procedure:**
 1. Download all desired genomes (in this repo, these are in 'Models/Genomes/'):
 
 2. Using a command line interface, navigate to the CarveMe installation directory and initialize the software:
@@ -33,19 +35,7 @@ done
 ```
 This will create one SBML draft model corresponding to each genome, and will store them in the 'sbml_noGF' directory.
 
- Alternatively, to generate draft models for all genomes from a text file, navigate to desired directory and run:
-```bash
-{
-cat AtLSPHERE_RefSeq_041921.txt | while read line 
-do
-   outfile=$(echo $line | awk -F'[.]' '{print $1}')
-   carve --refseq $line -o "../CarveMe/sbml_noGF/$outfile.xml
-done
-}
-```
-This will also create draft models in the 'sbml_noGF' directory, but relies on the entries in the provided text file.
-
- Otherwise, to generate models for select genomes, navigate to desired directory and run:
+ Alternatively, to generate models for individual genomes, navigate to desired directory and run:
 ```bash
 {
 carve --refseq GCF_XXXXXXXXX.1 -o ../CarveMe/sbml_noGF/GCF_XXXXXXXXX.xml
@@ -53,13 +43,13 @@ done
 }
 ```
 
+**Key outputs:**
+  * One draft genome-scale model (in SBML format) for each input genome
+
 ## Generate gapfilled models using NICEgame:
 
 **Main script:**
 * Gapfilling/NICEgame/gapFillModelTFA.m
-
-**Main resources:**
-  * matTFA-master repository
 
 **Key inputs:**
   * Draft models (in 'FBA/Models/CarveMe/sbml_noGF/')
@@ -70,13 +60,13 @@ done
 
 2. Open MATLAB and the 'gapFillModelTFA.m' script. This script generates genome-scale metabolic models from previously-generated CarveMe reconstructions and experimental data using the matTFA (Thermodynamic Flux Analysis, Salvy *et al.*, 2019) and NICEgame (Vayena *et al.*, 2022) pipelines.
 
-     This script takes a CarveMe reconstruction of an organism and its corresponding experimental data (in .xlsx format representing growth/no growth on carbon sources) as its main inputs. It performs gapfilling using NICEgame and matTFA, which merge the corresponding draft model with a universal metabolite/reaction database and constrains reactions using thermodynamic information. NICEgame then finds candidate reactions that need to be added to the reconstructions to enable growth on each carbon source.
+     This script takes a CarveMe draft metabolic model of an organism and its corresponding experimental data (in .xlsx format representing growth/no growth on carbon sources) as its main inputs. It performs gapfilling using NICEgame and matTFA, which merge the corresponding draft model with a universal metabolite/reaction database and constrains reactions using thermodynamic information. NICEgame then finds candidate reactions that need to be added to the reconstructions to enable growth on each carbon source.
 
      The script then selects the best combination of gapfilled reactions to use by predicting the growth/no growth phenotype of each model on combinations of solutions. It then saves COBRA model files for downstream curation.
 
 **Key outputs:**
   * List of candidate reactions for gapfilling (in 'FBA/Models/NICEgame/GapfillingResults/')
-  * Preliminary gapfilled models (in 'FBA/Models/NICEgame/Gapfilled/')
+  * Gapfilled models (one per organism, in 'FBA/Models/NICEgame/Gapfilled/')
 
 ## Perform additional model curation to resolve false negative and positive growth:
 
@@ -85,7 +75,7 @@ done
   * Gapfilling/troubleshootFalsePosNeg.m
 
 **Key inputs:**
-  * gapfilled models (in 'FBA/Models/NICEgame/Gapfilled/')
+  * Gapfilled models (one per organism, in 'FBA/Models/NICEgame/Gapfilled/')
   * Carbon source screen data ('Medium/CSourceScreen_Jul2022.xlsx')
 
 **Procedure:**
@@ -94,25 +84,38 @@ done
 2. Run the 'troubleshootFalsePosNeg.m' script, which will reference other models within the collection to correct for false negative and positive growth predictions. Here, the threshold for false positives and the method of correction can be adjusted.
 
 **Key outputs:**
-  * Gapfilled models (in 'FBA/Models/NICEgame/Gapfilled/FPFNCorrected/')
+  * FP/FN-corrected gapfilled models (one per organism, in 'FBA/Models/NICEgame/Gapfilled/FPFNCorrected/')
 
-## Perform final model formatting and verification:
+## Perform final model formatting:
 
 **Main scripts:**
   * Final/finalModelFormatting.m
 
 **Key inputs:**
-  * gapfilled models (in 'FBA/Models/NICEgame/Gapfilled/FPFNCorrected/')
+  * FP/FN-corrected gapfilled models (one per organism, in 'FBA/Models/NICEgame/Gapfilled/FPFNCorrected/')
   * Annotation databases (in 'FBA/Scripts/ModelGeneration/Final/databases/')
 
 **Procedure:**
 1. Run the 'finalModelFormatting.m' script, which will attempt to annotate all model metabolites, genes, reactions, and subsystems. It will output a .mat file containing the formatted model in COBRA format, as well as an SBML model in .xml.
 
-2. Navigate to the directory containing the gapfilled models in SBML format and run MEMOTE via a command line interface to verify the models:
+**Key outputs:**
+  * Annotated models in .mat format (one per organism, in 'FBA/Models/Final/')
+  * Annotated models in SBML format (one per organism, in 'FBA/Models/Final/sbml')
+
+# Verify models using MEMOTE:
+
+**Key inputs:**
+  * Annotated models in SBML format (in 'FBA/Models/Final/sbml')
+
+**Procedure:**
+
+1. Navigate to the directory containing the gapfilled models in SBML format and run MEMOTE via a command line interface to verify the models:
+
 ```bash
-python3 getMemoteScores.py
+for i in *.xml; do
+  memote report snapshot --filename "../../Reports/${i%.*}.html" "$i" || break
+done
 ```
 
 **Key outputs:**
-  * Gapfilled and annotated models (in 'FBA/Models/Final/')
   * MEMOTE quality scores for each model (in 'FBA/Models/Reports/')
