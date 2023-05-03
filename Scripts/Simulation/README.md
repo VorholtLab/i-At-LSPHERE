@@ -18,6 +18,7 @@ Software requirements:
   * Curated models (in 'Models/Final/')
   * Medium composition ('Medium/minMedCSourceScreen.mat')
 
+**Procedure:**
 1. Open MATLAB and the 'competitiveOutcomesPairs.m' script. This script computes competitive outcomes between strain pairs and community compositions, and compares them to experimental outcomes if desired.
 
 **Key outputs:**
