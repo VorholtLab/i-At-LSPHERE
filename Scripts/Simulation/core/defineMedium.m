@@ -6,9 +6,15 @@ function newModels  = defineMedium(minimalMedium,vitamins,nutrients,models,minMe
 % with bounds altered with new medium conditions.
 %
 % Inputs:
-%    definedMedium: A cell array of external metabolites in the starting
-%        medium
-%    models: A struct of metabolic models
+%    minimalMedium: A cell array of minimal medium components, provided at
+%    minMedUptakeRate
+%    vitamims, nutrients: Cell arrays of vitamins and carbon sources,
+%    provided at vitaminUptakeRate, and nutrientUptakeRate, respectively.
+%    models: A struct of metabolic models minMedUptakeRate,
+%    vitaminUptakeRate, nutrientUptakeRate: v_max values for
+%    minimal medium components, vitamins, and carbon sources, respectively.
+%    uptakeRatios (optional): Numerical arrays of uptake ratios for different carbon
+%    source types.
 %
 % Outputs:
 %    newModels: A struct of the metabolic models with their LBs altered to
@@ -34,11 +40,8 @@ for i = 1:length(modelNames)
     model.lb(minMedRxns) = -minMedUptakeRate;
 
     if nargin < 8
-        for j = 1:length(nutrientRxns) % If the model can't consume a nutrient or must secrete it, keep it that way
-    %         if modelOrig.lb(nutrientRxns(j)) < 0
-    %             warning(['model ' modelNames{i} ' cannot uptake using ' modelOrig.rxns{nutrientRxns(j)} '.'])
-                model.lb(nutrientRxns(j)) = -nutrientUptakeRate;
-    %         end
+        for j = 1:length(nutrientRxns)
+            model.lb(nutrientRxns(j)) = -nutrientUptakeRate;
         end
     else
         for j = 1:length(nutrients)
@@ -47,11 +50,8 @@ for i = 1:length(modelNames)
         end
     end
     
-    for j = 1:length(vitaminRxns) % If the model can't consume a vitamin or must secrete it, keep it that way
-%         if modelOrig.lb(vitaminRxns(j)) < 0
-%             warning(['model ' modelNames{i} ' cannot uptake using ' modelOrig.rxns{vitaminRxns(j)} '.'])            
-            model.lb(vitaminRxns(j)) = -vitaminUptakeRate;
-%         end
+    for j = 1:length(vitaminRxns)     
+        model.lb(vitaminRxns(j)) = -vitaminUptakeRate;
     end
     
     [newModels.(modelNames{i})] = model;
