@@ -87,6 +87,7 @@ done
   * gapfilled models (in 'FBA/Models/NICEgame/Gapfilled/')
   * Carbon source screen data ('Medium/CSourceScreen_Jul2022.xlsx')
 
+**Procedure:**
 1. Run the 'getModelAccuracy.m' script, which will output a .mat file containing accuracy statistics of all models in the relevant directory.
 
 2. Run the 'troubleshootFalsePosNeg.m' script, which will reference other models within the collection to correct for false negative and positive growth predictions. Here, the threshold for false positives and the method of correction can be adjusted.
@@ -103,6 +104,7 @@ done
   * gapfilled models (in 'FBA/Models/NICEgame/Gapfilled/FPFNCorrected/')
   * Annotation databases (in 'FBA/Scripts/ModelGeneration/Final/databases/')
 
+**Procedure:**
 1. Run the 'finalModelFormatting.m' script, which will attempt to annotate all model metabolites, genes, reactions, and subsystems. It will output a .mat file containing the formatted model in COBRA format, as well as an SBML model in .xml.
 
 2. Navigate to the directory containing the gapfilled models in SBML format and run MEMOTE via a command line interface to verify the models:
