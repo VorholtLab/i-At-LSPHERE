@@ -5,7 +5,7 @@ This repository contains the collection of genome-scale metabolic models reporte
 
 # Model collection, genomes, and reports
 
-Located in the 'Models/Final/' directory, contains genome-scale models for 224 bacterial members of the *Arabidopsis thaliana* phyllosphere microbiome. The models are provided both in .mat format (as outputs of the model generation scripts and for downstream simulation) and in .sbml format for use with COBRApy. The genome files used for generating draft metabolic models are located in 'Models/Genomes.' MEMOTE reports for each metabolic model are located in 'Models/Reports/.'
+Located in the 'Models/Final/' directory, contains genome-scale models for 224 bacterial members of the *Arabidopsis thaliana* phyllosphere microbiome (*At*-LSPHERE, Bai *et al.*, 2015). The models are provided both in .mat format (as outputs of the model generation scripts and for downstream simulation) and in .sbml format for use with COBRApy. The genome files used for generating draft metabolic models are located in 'Models/Genomes.' MEMOTE reports for each metabolic model are located in 'Models/Reports/.'
 
 # Model generation and simulation scripts
 
