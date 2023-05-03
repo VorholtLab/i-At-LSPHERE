@@ -161,6 +161,7 @@ function solution = optimizeCbModelminNormCoup(model, osenseStr, minNorm, allowL
 %                                        fluxes vector
 %       - Stefania Magnusdottir 06/02/17 Replace LPproblem2 upper bound 10000 with Inf
 %       - Ronan Fleming         13/06/17 Support for coupling C*v<=d
+%       - Alan Pacheco          06/20/22 Support for minNorm in coupled models
 %
 % NOTE:
 %
