@@ -10,6 +10,7 @@ Software requirements:
   * [CarveMe](https://carveme.readthedocs.io/en/latest/installation.html)
   * [Python](https://www.python.org) 3.6 or 3.7
   * [COBRA Toolbox](https://opencobra.github.io/cobratoolbox/stable/) v2.24.3 or higher
+  * [IBM CPLEX Solver](https://www.ibm.com/products/ilog-cplex-optimization-studio/cplex-optimizer) v12.10
   * NICEgame (from this repository)
   * [MEMOTE](https://memote.readthedocs.io/en/latest/)
 

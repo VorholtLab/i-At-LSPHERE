@@ -8,6 +8,7 @@ These scripts will simulate competitive outcomes between previously-generated ge
 Software requirements:
   * [MATLAB](https://www.mathworks.com/products/matlab.html) R2021a or higher
   * [COBRA Toolbox](https://opencobra.github.io/cobratoolbox/stable/) v2.24.3 or higher
+  * [IBM CPLEX Solver](https://www.ibm.com/products/ilog-cplex-optimization-studio/cplex-optimizer) v12.10
 
 ## Compute competitive outcomes and compare to experimental data:
 
