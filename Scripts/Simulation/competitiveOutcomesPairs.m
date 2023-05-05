@@ -20,7 +20,6 @@ modelsDir = '../../Models/Final/';
 % In planta exp. 1
 % selectModels = {'Leaf34','Leaf179','Leaf257','Leaf233','Leaf202','Leaf15','Leaf145'}; % Omit if choosing all models
 % communityModels = selectModels;
-% % expLog2FCMat = [NaN,0,-0.30,0.20,-1.1,-0.80,-0.10,-4.6;-0.40,NaN,-3.3,-0.70,-0.40,-0.90,-0.50,NaN;-0.80,0,NaN,-1.5,-1.8,-0.40,-1.5,-3.1;0.10,-0.20,0.10,NaN,-0.20,-0.20,-0.90,NaN;0.50,-0.90,0.40,0.30,NaN,-0.30,-0.20,-0.50;-1.3,-1.9,0.20,-1.6,-5.4,NaN,-3.2,-4.5;-0.40,-1.1,-0.30,-0.60,-0.60,-1.2,NaN,-1.9];
 % expLog2FCMat = [NaN,0.4,0.6,0.7,-1.3,-0.7,0.6,-3.5;-0.5,NaN,-2.1,0.0,-0.8,-0.4,0.6,-2.2;-0.2,0.4,NaN,-2,-1.7,-0.1,-2.1,-3.4;0.2,0.4,0,NaN,-0.7,-0.6,-0.2,-1.8;1.1,0.8,1.7,0,NaN,-0.3,0.1,0.6;0,-0.2,2.1,0.6,-3.7,NaN,-0.8,-4.2;0.6,-0.7,-0.6,-1.3,0.4,-1,NaN,-3.7];
 % plotExpData = 1;
 % plotNicheOverlap = 1;
@@ -434,7 +433,7 @@ aggregateCompOutcomeMat(find(aggregateCompOutcomeMat < -5)) = -5;
 %% Plot
 close all force
 
-if clustering% && plotNicheOverlap
+if clustering
     if ~isempty(communityModels)
         matforClustering = NOIMat(:,1:end-1);
     else
